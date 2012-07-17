@@ -13,7 +13,8 @@ SEARCH_BASE = "/json/search/all"
 BIBTEX_OPTIONS = "do_username_prefix=0&key_type=4&incl_amazon=1&clean_urls=1&smart_wrap=1&q="
 
 module CiteULike
-  def search(query)
+  def self.search(query)
+    http = Net::HTTP.new(HOST)
     request = Net::HTTP::Get.new(SEARCH_BASE)
     request.set_form_data({ "q" => query })
     response = http.request(request)

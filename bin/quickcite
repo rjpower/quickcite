@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'quickcite'
+
+flags = {}
+optparse = OptionParser.new do|opts|
+ opts.banner = "Usage: quickrite -b <bibtex file> latex1 latex2 ... "
+
+ flags[:bibtex] = nil
+ opts.on( '-b', '--bibtex FILE', 'Extract/generate references to FILE' ) do|file|
+   flags[:bibtex] = file
+ end
+end
+
+optparse.parse!
+
+QuickCite::run(ARGV, flags[:bibtex])

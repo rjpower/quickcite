@@ -9,37 +9,42 @@ require 'quickcite/citeulike'
 
 CITE_REGEX = /\\cite\{([^\}]+)\}/
 
-def process_cite(bib, cite)
-  if !bib.has_key?(cite) then
-    puts(cite)
+module QuickCite
+  class Main
+    def initialize(latex_files, bibtex_file) 
+      @bib = BibTeX.open(bibtex_file, :include => [:meta_content])
+      puts("here")
+      latex_files.each do|f|
+        process_latex(f)
+      end
+    end
+
+    def process_cite(cite)
+      if !@bib.has_key?(cite) then
+        puts(cite)
+      end
+      puts("here2: ", cite)
+      CiteULike.search(cite)
+    end
+
+    def process_match(cite)
+      puts("here: ", cite[0].split(','))
+      cite[0].split(',').map do|c| 
+        process_cite(c)
+      end
+    end
+
+    def process_latex(f)
+      latex = File.read(f)
+      latex.scan(CITE_REGEX) do|m|
+        process_match(m)
+      end
+      puts(f)
+    end
   end
-end
-
-def process_match(bib, cite)
-  cite[0].split(',') do 
-    process_cite(bib, cite)
+  
+  def self.run(latex_files, bibtex_file) 
+    puts("here")
+    Main.new(latex_files, bibtex_file)
   end
-end
-
-
-flags = {}
-optparse = OptionParser.new do|opts|
- opts.banner = "Usage: quickrite -b <bibtex file> latex1 latex2 ... "
-
- flags[:bibtex] = nil
- opts.on( '-b', '--bibtex FILE', 'Extract/generate references to FILE' ) do|file|
-   flags[:bibtex] = file
- end
-end
-
-optparse.parse!
-
-
-bib = BibTeX.open(flags[:bibtex], :include => [:meta_content])
-ARGV.each do|f|
-  latex = File.read(f)
-  latex.scan(CITE_REGEX) do|m|
-    process_match(bib, m)
-  end
-  puts(f)
 end
