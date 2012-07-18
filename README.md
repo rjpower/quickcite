@@ -38,4 +38,6 @@ the paper you intended:
       (3) Impact of Chosen Error Criteria in RSS-based Localization: Power vs Distance vs Relative Distance Error Minimization.
           Giuseppe Bianchi, Nicola Blefari-Melazzi, Francesca Lo Piccolo
 
-Questions or suggestions: power@cs.nyu.edu.
+QuickCite relies on the excellent [bibtex-ruby](https://github.com/inukshuk/bibtex-ruby/) package.
+
+Questions or suggestions: [power@cs.nyu.edu](mailto:power@cs.nyu.edu)
