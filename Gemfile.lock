@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    quickcite (1.0.0)
+    quickcite (1.0.3)
       bibtex-ruby (>= 2.0)
       json
 

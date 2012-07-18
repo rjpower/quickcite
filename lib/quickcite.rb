@@ -40,6 +40,12 @@ module QuickCite
     include QuickCite
     def initialize(latex_files, bibtex_file)
       @source = DBLP.new
+      
+      if !File.exists?(bibtex_file) then
+        puts "Bibtex file #{bibtex_file} does not exist.  Creating an empty file."
+        open(bibtex_file, "w").write("")
+      end
+
       @bib = BibTeX.open(bibtex_file, :include => [:meta_content])
         
       latex_files.each do|f|
