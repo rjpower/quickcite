@@ -1,0 +1,91 @@
+{
+"result":{
+"query":"power* piccolo*",
+"status":
+{
+"@code":12,"text":"OK"
+},
+"time":{
+"@unit":"msecs",
+"text":4.96
+},
+"completions":{
+"@total":1,
+"@computed":1,
+"@sent":1,
+"c":{
+"@sc":202,
+"@dc":3,
+"@oc":3,
+"@id":11535429,
+"text":"piccolo"
+}
+},
+"hits":{
+"@total":3,
+"@computed":3,
+"@sent":3,
+"@first":0,
+"hit":[
+{
+"@score":102,
+"@id":1287205,
+"title":{
+"dblp:authors":{
+"dblp:author":[
+"Geev Mokryani",
+"Pierluigi Siano",
+"Antonio Piccolo",
+"Vito Calderaro",
+"Carlo Cecati"]},
+"dblp:title":{
+"@ee":"http://doi.ieeecomputersociety.org/10.1109/FUZZY.2011.6007591",
+"text":"A novel fuzzy system for wind turbines reactive power control. "},
+"dblp:venue":{
+"@url":"db/conf/fuzzIEEE/fuzzIEEE2011.html#MokryaniSPCC11",
+"text":"FUZZ-IEEE 2011:231-235"},
+"dblp:year":2011,
+"dblp:type":"inproceedings"},
+"url":"http://www.dblp.org/rec/bibtex/conf/fuzzIEEE/MokryaniSPCC11"
+},
+{
+"@score":102,
+"@id":1565069,
+"title":{
+"dblp:authors":{
+"dblp:author":[
+"Russell Power",
+"Jinyang Li"]},
+"dblp:title":{
+"@ee":"http://www.usenix.org/events/osdi10/tech/full_papers/Power.pdf",
+"text":"Piccolo: Building Fast, Distributed Programs with Partitioned Tables. "},
+"dblp:venue":{
+"@url":"db/conf/osdi/osdi2010.html#PowerL10",
+"text":"OSDI 2010:293-306"},
+"dblp:year":2010,
+"dblp:type":"inproceedings"},
+"url":"http://www.dblp.org/rec/bibtex/conf/osdi/PowerL10"
+},
+{
+"@score":102,
+"@id":2042841,
+"title":{
+"dblp:authors":{
+"dblp:author":[
+"Giuseppe Bianchi",
+"Nicola Blefari-Melazzi",
+"Francesca Lo Piccolo"]},
+"dblp:title":{
+"@ee":"http://dx.doi.org/10.1109/ISCC.2007.4381640",
+"text":"Impact of Chosen Error Criteria in RSS-based Localization: Power vs Distance vs Relative Distance Error Minimization. "},
+"dblp:venue":{
+"@url":"db/conf/iscc/iscc2007.html#BianchiBP07",
+"text":"ISCC 2007"},
+"dblp:year":2007,
+"dblp:type":"inproceedings"},
+"url":"http://www.dblp.org/rec/bibtex/conf/iscc/BianchiBP07"
+}
+]
+}
+}
+}
