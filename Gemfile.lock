@@ -8,7 +8,6 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    addressable (2.2.8)
     bibtex-ruby (2.0.12)
       latex-decode (>= 0.0.6)
       multi_json (~> 1.3)
@@ -24,7 +23,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  addressable
   bundler
   highline
   nokogiri
