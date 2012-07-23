@@ -11,8 +11,18 @@ require "quickcite/citeulike"
 require "quickcite/dblp"
 
 module QuickCite
-  CITE_REGEX = /\\cite\{([^\}]+)\}/
+  CITE_REGEX = /\\cite[tp]?\{([^\}]+)\}/
   SPLIT_REGEX = /([A-Z]+[a-z]+|[0-9]+|[^\\p]+)/
+  
+  class Result < Struct.new(:title, :venue, :authors, :url, :date)    
+    def initialize(hash)
+      super(*hash.values_at(:title, :venue, :authors, :url, :date))
+    end
+  end
+  
+  def self.run(latex_files, bibtex_file)
+    Main.new(latex_files, bibtex_file)
+  end
   
   # Convert a citation reference (e.g "PowerPiccolo2008") into a
   # list of strings appropriate for submission to a search engine.
@@ -21,13 +31,23 @@ module QuickCite
   def self.cite_to_query(cite)
     cite.scan(SPLIT_REGEX).map { |w| w[0] }
   end
-
+  
+  # Query the user for a result from the result list to 
+  # use for this citation reference.  
+  # 
+  # Returns the selected reference or nil if no match
+  # was selected.
   def self.ask_user(cite, result_list)
+    if result_list.empty? then
+      return nil
+    end
+    
     puts "Result to use for \{#{cite}\}: "
     puts "  (0) Skip this citation"
     result_list.each_with_index do |r, idx|
-      puts "  (#{idx + 1}) #{r.title}"
-      puts "      #{r.authors.join(', ')}"
+      puts "  (#{idx + 1}) #{r.title} (#{r.date})"
+      puts "      Authors: #{r.authors.join(', ')}"
+      puts "      Venue: #{r.venue}"
     end
     
     c = HighLine::SystemExtensions::get_character.chr.to_i
@@ -35,7 +55,7 @@ module QuickCite
       return result_list[c - 1]
     end
   end
-
+  
   class Main
     include QuickCite
     def initialize(latex_files, bibtex_file)
@@ -45,13 +65,13 @@ module QuickCite
         puts "Bibtex file #{bibtex_file} does not exist.  Creating an empty file."
         open(bibtex_file, "w").write("")
       end
-
+      
       @bib = BibTeX.open(bibtex_file, :include => [:meta_content])
-        
-      latex_files.each do|f|
+      
+      latex_files.each { |f|
         puts("Processing... #{f}")
         process_latex(f)
-      end
+      }
       
       puts("Writing bibtex...")
       outfile = open(bibtex_file, "w")
@@ -64,7 +84,7 @@ module QuickCite
       e.key = cite
       @bib << e
     end
-
+    
     def process_cite(cite)
       if @bib.has_key?(cite) then
         puts("Skipping matched reference #{cite}")
@@ -81,19 +101,14 @@ module QuickCite
         end
       end
     end
-
+    
     def process_latex(f)
       latex = File.read(f)
-      latex.scan(CITE_REGEX) do|m|
-        m[0].split(",").map do|c|
+      latex.scan(CITE_REGEX) { |m|
+        m[0].split(",").map  { |c|
           process_cite(c)
-        end
-      end
-      puts(f)
+        }
+      }
     end
-  end
-
-  def self.run(latex_files, bibtex_file)
-    Main.new(latex_files, bibtex_file)
   end
 end

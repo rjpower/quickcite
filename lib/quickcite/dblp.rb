@@ -6,7 +6,7 @@
 
 require "net/http"
 require "nokogiri"
-require "quickcite/json"
+require "json"
 require "uri"
 
 module QuickCite
@@ -15,34 +15,52 @@ module QuickCite
     # the q= argument has to come first.
     SEARCH_BASE = "http://www.dblp.org/search/api/?"
     SEARCH_SUFFIX = "&c=4&f=0&format=json&h=10"
-
-    Result = Struct.new("Result", :title, :authors, :url)
+    
+    def hit_to_result(h)
+      t = h["title"]
+      title = t["dblp:title"]["text"]
+      venue = t["dblp:venue"]["text"]
+      authors = t["dblp:authors"]["dblp:author"]
+      date = t["dblp:year"].to_s
+      Result.new(
+        :title => title, 
+        :authors => authors.to_a, 
+        :url => h["url"], 
+        :venue => venue,
+        :date => date)
+    end
+    
     def search(query)
-      #      json = JSONUtil.parse(File.read("test/power-piccolo.json"))
+      #json = JSON.parse(File.read("test/foobar.json"))
       query_str = "q=" + URI::escape(query.join(" "))
       uri = URI::parse(SEARCH_BASE + query_str + SEARCH_SUFFIX)
       
+      puts("Fetching from #{uri}")
+      
       response = Net::HTTP::get(uri)
-      json = JSONUtil.parse(response)
-
-      json.result.hits.hit.map do |h|
-        Result.new(
-        h.title["dblp:title"].text,
-        h.title["dblp:authors"]["dblp:author"].to_a,
-        h.url)
+      json = JSON.parse(response)
+      
+      hits = json["result"]["hits"]["hit"]
+      
+      # NB.  when there is only a single result DBLP returns a single
+      # hit element instead of an array.
+      case hits
+      when Array 
+        hits.map {  |h| hit_to_result(h) }
+      else
+        [hit_to_result(hits)]
       end
     end
-
+    
     def bibtex(result)
       #      dom = Nokogiri.Slop(open("test/power-piccolo.html"))
-      puts("RESULT #{result.url}")
       dom = Nokogiri.Slop Net::HTTP.get(URI::parse(result.url))
       entries = dom.html.body.pre
       case entries
-        when Nokogiri::XML::NodeSet
-          return entries[0].to_str
-        else
-          return entries.to_str
+      when Nokogiri::XML::NodeSet
+        return entries[0].to_str
+      else
+        return entries.to_str
       end
     end
   end

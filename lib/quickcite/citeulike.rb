@@ -6,7 +6,7 @@
 
 require "net/http"
 require "uri"
-require "quickcite/json"
+require "json"
 
 module QuickCite
   class CiteULike
@@ -19,7 +19,7 @@ module QuickCite
       request = Net::HTTP::Get.new(SEARCH_BASE)
       request.set_form_data({ "q" => query })
       response = http.request(request)
-      js = JSONUtil.Parse(response.body)
+      js = JSON.parse(response.body)
       return js
     end
     

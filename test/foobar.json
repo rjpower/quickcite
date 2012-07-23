@@ -1,0 +1,50 @@
+{
+"result":{
+"query":"Foo Bar",
+"status":
+{
+"@code":12,"text":"OK"
+},
+"time":{
+"@unit":"msecs",
+"text":2.73
+},
+"completions":{
+"@total":1,
+"@computed":1,
+"@sent":1,
+"c":{
+"@sc":2,
+"@dc":1,
+"@oc":1,
+"@id":612166,
+"text":"bar"
+}
+},
+"hits":{
+"@total":1,
+"@computed":1,
+"@sent":1,
+"@first":0,
+"hit":{
+"@score":102,
+"@id":2014945,
+"title":{
+"dblp:authors":{
+"dblp:author":[
+"Chee-Kit Looi",
+"Foo-Keong Ng",
+"Tek-Hong Kho"]},
+"dblp:title":{
+"@ee":"http://www.booksonline.iospress.nl/Content/View.aspx?piid=7515",
+"text":"Technology-Enabled Pedagogy to Bridge Bar Diagrams to Letter-Symbolic Algebra. "},
+"dblp:venue":{
+"@url":"db/conf/icce/icce2007.html#LooiNK07",
+"text":"ICCE 2007:29-36"},
+"dblp:year":2007,
+"dblp:type":"inproceedings"},
+"url":"http://www.dblp.org/rec/bibtex/conf/icce/LooiNK07"
+}
+}
+}
+}

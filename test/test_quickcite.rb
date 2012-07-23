@@ -1,16 +1,8 @@
 #!/usr/bin/env ruby
 
 require "quickcite"
-require "quickcite/json"
 
 require "test/unit"
-
-class TestJson < Test::Unit::TestCase
-  def test_simple()
-    v = QuickCite::JSONUtil.parse(File.read('test/power-piccolo.json'))
-    v.result.hits.hit.map { |h| puts(h.url) }
-  end
-end
 
 class TestMain < Test::Unit::TestCase
   def test_simple()
@@ -19,6 +11,7 @@ class TestMain < Test::Unit::TestCase
   This is a test latex file.
 I like to cite \\cite{PowerPiccolo}
 And \\cite{MapreduceDean}
+ANd \\citet{FooBar}
 END
   texfile.close
 
