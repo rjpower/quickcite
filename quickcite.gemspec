@@ -20,5 +20,7 @@ Visit https://github.com/rjpower/quickcite for install instructions.
   END
   s.add_dependency "bibtex-ruby", ">=2.0"
   s.add_dependency "json"
-  s.add_development_dependency "bundler"
+  s.add_dependency "nokogiri"
+  s.add_dependency "highline"
+  s.add_dependency "bundler"
 end
