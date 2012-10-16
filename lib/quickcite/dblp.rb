@@ -39,7 +39,12 @@ module QuickCite
       
       response = Net::HTTP::get(uri)
       json = JSON.parse(response)
-      
+     
+      hit_count = json["result"]["hits"]["@sent"];
+      if hit_count == 0 then
+        []
+      end
+
       hits = json["result"]["hits"]["hit"]
       
       # NB.  when there is only a single result DBLP returns a single

@@ -1,29 +1,31 @@
 PATH
   remote: .
   specs:
-    quickcite (1.0.3)
+    quickcite (1.0.5)
       bibtex-ruby (>= 2.0)
+      bundler
+      highline
       json
+      nokogiri
 
 GEM
   remote: http://rubygems.org/
   specs:
-    bibtex-ruby (2.0.12)
+    bibtex-ruby (2.1.0)
       latex-decode (>= 0.0.6)
       multi_json (~> 1.3)
-    highline (1.6.13)
-    json (1.7.3)
+    highline (1.6.14)
+    json (1.7.5)
     latex-decode (0.0.12)
       unicode (~> 0.4)
     multi_json (1.3.6)
     nokogiri (1.5.5)
-    unicode (0.4.2)
+    unicode (0.4.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler
   highline
   nokogiri
   quickcite!
