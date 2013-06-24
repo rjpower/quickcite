@@ -12,11 +12,10 @@ Quickstart
 
 ### Usage
 
-Add it to your Makefile:
+On the command line:
 
-    paper.pdf: ...
-      quickcite -b paper.bib *.tex
-      ...
+    quickcite -b paper.bib *.tex
+
 
 Now add a reference in your paper:
 
@@ -37,6 +36,15 @@ the paper you intended:
           Russell Power, Jinyang Li
       (3) Impact of Chosen Error Criteria in RSS-based Localization: Power vs Distance vs Relative Distance Error Minimization.
           Giuseppe Bianchi, Nicola Blefari-Melazzi, Francesca Lo Piccolo
+
+### Makefile Integration
+
+For the really lazy amongst us, try adding it to your Makefile rule:
+
+    paper.pdf: ...
+      quickcite -b paper.bib *.tex
+      ...
+
 
 QuickCite relies on the excellent [bibtex-ruby](https://github.com/inukshuk/bibtex-ruby/) package.
 

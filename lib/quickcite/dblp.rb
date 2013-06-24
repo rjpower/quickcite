@@ -17,11 +17,11 @@ module QuickCite
     SEARCH_SUFFIX = "&c=4&f=0&format=json&h=10"
     
     def hit_to_result(h)
-      t = h["title"]
-      title = t["dblp:title"]["text"]
-      venue = t["dblp:venue"]["text"]
-      authors = t["dblp:authors"]["dblp:author"]
-      date = t["dblp:year"].to_s
+      t = h["info"]
+      title = t["title"]["text"]
+      venue = t["venue"]["text"]
+      authors = t["authors"]["author"]
+      date = t["year"].to_s
       Result.new(
         :title => title, 
         :authors => authors.to_a, 
