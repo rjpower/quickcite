@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 
-require "quickcite"
+require "rubygems"
+require "bundler/setup"
 
+require "quickcite"
 require "test/unit"
 
 class TestMain < Test::Unit::TestCase

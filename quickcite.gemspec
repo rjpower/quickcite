@@ -16,17 +16,11 @@ Simplify your (academic) life.
 
 Instead of manually hunting down references, let QuickCite do the work for you!
 
-Usage:
+For usage instructions, see http://github.com/rjpower/quickcite.
 
-    quickcite -b ref.bib *.tex
-
-Each \\cite command which does not have a matching entry in ref.bib will be searched
-for using DBLP.  Simply choose the result that matches the reference you want and your
-bibtex file will be updated automatically.
   END
   s.add_dependency "bibtex-ruby", ">=2.0"
   s.add_dependency "json"
   s.add_dependency "nokogiri"
-  s.add_dependency "highline"
   s.add_dependency "bundler"
 end
