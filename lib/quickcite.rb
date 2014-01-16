@@ -48,7 +48,7 @@ module QuickCite
       puts "      Venue: #{r.venue}"
     end
     
-    c = STDIN.readline.strip
+    c = Integer(STDIN.readline.strip)
     if c > 0 && c <= result_list.length then
       return result_list[c - 1]
     end
@@ -72,12 +72,14 @@ module QuickCite
       end
       
       results = @source.search(query)
-      accepted = ask_user(cite, results)
-      if accepted == nil
-        puts "Skipping update for reference #{cite}"
-      else
-        puts "Updating bibtex for #{cite} with result: \n#{accepted.title}"
-        update_bibtex(cite, accepted)
+      if results != nil
+        accepted = ask_user(cite, results)
+        if accepted == nil
+          puts "Skipping update for reference #{cite}"
+        else
+          puts "Updating bibtex for #{cite} with result: \n#{accepted.title}"
+          update_bibtex(cite, accepted)
+        end
       end
     end
   end
