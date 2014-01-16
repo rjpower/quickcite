@@ -41,20 +41,22 @@ module QuickCite
       json = JSON.parse(response)
      
       hit_count = json["result"]["hits"]["@sent"];
-      if hit_count == 0 then
+      if Integer(hit_count) == 0 then
         []
+        puts "No match found"
+      else
+        hits = json["result"]["hits"]["hit"]
+        
+        # NB.  when there is only a single result DBLP returns a single
+        # hit element instead of an array.
+        case hits
+        when Array 
+          hits.map {  |h| hit_to_result(h) }
+        else
+          [hit_to_result(hits)]
+        end
       end
 
-      hits = json["result"]["hits"]["hit"]
-      
-      # NB.  when there is only a single result DBLP returns a single
-      # hit element instead of an array.
-      case hits
-      when Array 
-        hits.map {  |h| hit_to_result(h) }
-      else
-        [hit_to_result(hits)]
-      end
     end
     
     def bibtex(result)
