@@ -60,7 +60,7 @@ module QuickCite
     def bibtex(result)
       #      dom = Nokogiri.Slop(open("test/power-piccolo.html"))
       dom = Nokogiri.Slop Net::HTTP.get(URI::parse(result.url))
-      entries = dom.html.body.pre
+      entries = dom.html.body.div.pre
       case entries
       when Nokogiri::XML::NodeSet
         return entries[0].to_str
